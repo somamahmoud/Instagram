@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="InstagramDBModelStoreContainer" CdmEntityContainer="InstagramDBEntities">
+    <EntitySetMapping Name="Accounts">
+      <EntityTypeMapping TypeName="InstagramDBModel.Account">
+        <MappingFragment StoreEntitySet="Account">
+          <ScalarProperty Name="accountId" ColumnName="accountId" />
+          <ScalarProperty Name="Fname" ColumnName="Fname" />
+          <ScalarProperty Name="Lname" ColumnName="Lname" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="profile_pic" ColumnName="profile_pic" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ApprovedFriends">
+      <EntityTypeMapping TypeName="InstagramDBModel.ApprovedFriend">
+        <MappingFragment StoreEntitySet="ApprovedFriend">
+          <ScalarProperty Name="friendId" ColumnName="friendId" />
+          <ScalarProperty Name="mainuser" ColumnName="mainuser" />
+          <ScalarProperty Name="frienduser" ColumnName="frienduser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Comments">
+      <EntityTypeMapping TypeName="InstagramDBModel.Comment">
+        <MappingFragment StoreEntitySet="Comment">
+          <ScalarProperty Name="commentId" ColumnName="commentId" />
+          <ScalarProperty Name="comment1" ColumnName="comment" />
+          <ScalarProperty Name="postId" ColumnName="postId" />
+          <ScalarProperty Name="accountId" ColumnName="accountId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DisLikes">
+      <EntityTypeMapping TypeName="InstagramDBModel.DisLike">
+        <MappingFragment StoreEntitySet="DisLikes">
+          <ScalarProperty Name="dislikeId" ColumnName="dislikeId" />
+          <ScalarProperty Name="aers" ColumnName="aers" />
+          <ScalarProperty Name="accountId" ColumnName="accountId" />
+          <ScalarProperty Name="postId" ColumnName="postId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Friend_Request">
+      <EntityTypeMapping TypeName="InstagramDBModel.Friend_Request">
+        <MappingFragment StoreEntitySet="Friend_Request">
+          <ScalarProperty Name="requestId" ColumnName="requestId" />
+          <ScalarProperty Name="reciever" ColumnName="reciever" />
+          <ScalarProperty Name="sender" ColumnName="sender" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Likes">
+      <EntityTypeMapping TypeName="InstagramDBModel.Like">
+        <MappingFragment StoreEntitySet="Likes">
+          <ScalarProperty Name="likeId" ColumnName="likeId" />
+          <ScalarProperty Name="taha" ColumnName="taha" />
+          <ScalarProperty Name="accountId" ColumnName="accountId" />
+          <ScalarProperty Name="postId" ColumnName="postId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Posts">
+      <EntityTypeMapping TypeName="InstagramDBModel.Post">
+        <MappingFragment StoreEntitySet="Post">
+          <ScalarProperty Name="postId" ColumnName="postId" />
+          <ScalarProperty Name="post_pic" ColumnName="post_pic" />
+          <ScalarProperty Name="content" ColumnName="content" />
+          <ScalarProperty Name="fk_Acount_id" ColumnName="fk_Acount_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

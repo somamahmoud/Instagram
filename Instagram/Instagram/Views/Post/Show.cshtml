@@ -1,0 +1,34 @@
+﻿@model IEnumerable<Instagram.Models.Post>
+
+@{
+    ViewBag.Title = "Show";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<div class="Posts-Container">
+    @foreach (var item in Model)
+    {
+    <div class="Post-Container">
+        <div class="Uploaded-By">
+            <img src="~/images/profile_pic/@Html.DisplayFor(modelItem => item.Account.profile_pic)" />
+            @Html.DisplayFor(modelItem => item.Account.Fname)
+            @Html.DisplayFor(modelItem => item.Account.Lname)
+            :
+            @Html.DisplayFor(modelItem => item.content)
+            <hr />
+        </div>
+        <div class="Post-Image">
+            <img src="~/images/post_pic/@Html.DisplayFor(modelItem => item.post_pic)" />
+        </div>
+        <div class="Post-Socials">
+            @using (@Html.BeginForm("Details", "Post", FormMethod.Get))
+            {
+                <input type="hidden" id="postId" name="postId" value="@Html.DisplayFor(modelItem => item.postId)">
+                <input type="submit" name="Details" value="Details" />
+            }
+        </div>
+    </div>
+    }
+
+</div>

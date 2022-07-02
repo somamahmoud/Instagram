@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Instagram.Models.Account>
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (Model == null)
+{
+<h2>No Matches Result</h2>
+}
+else
+{
+<div class="Searched-Users">
+
+    @foreach (var item in Model)
+    {
+    <div class="Searched-User">
+        @using (@Html.BeginForm("FriendRequest", "Friend", FormMethod.Get))
+        {
+        <div class="Searched-User-Image">
+            <img src="~/images/profile_pic/@Html.DisplayFor(modelItem => item.profile_pic)" />
+        </div>
+            <div class="Searched-User-Name">
+                @Html.DisplayFor(modelItem => item.Fname)
+                @Html.DisplayFor(modelItem => item.Lname)
+            </div>
+            <div class="Searched-User-Email">
+                @Html.DisplayFor(modelItem => item.Email)
+            </div>
+            <div class="Friend-Request">
+                <input type="hidden" id="recieverId" name="recieverId" value="@Html.DisplayFor(modelItem => item.accountId)">
+                <input type="submit" value="Friend Request" />
+            </div>
+        }
+    </div>
+    }
+</div>
+}

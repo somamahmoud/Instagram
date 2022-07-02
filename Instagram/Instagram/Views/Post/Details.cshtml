@@ -1,0 +1,55 @@
+﻿@model Instagram.viewModels.post_comment
+
+@{
+    /**/
+
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="flexx">
+    @foreach (var item in Model.post)
+    {
+        <div class="Post-Container-Details">
+            <div class="Uploaded-By-Details">
+                <img src="~/images/profile_pic/@Html.DisplayFor(modelItem => item.Account.profile_pic)" />
+                <b>
+                    @Html.DisplayFor(modelItem => item.Account.Fname)
+                    @Html.DisplayFor(modelItem => item.Account.Lname)
+                </b>
+                :
+                @Html.DisplayFor(modelItem => item.content)
+                <hr />
+            </div>
+            <div class="Post-Image-Details">
+                <img src="~/images/post_pic/@Html.DisplayFor(modelItem => item.post_pic)" />
+            </div>
+            <div class="Post-Like-Dislike">
+                @Html.ActionLink("Likes:", "Like", new { controller = "Post", postId = item.postId }) @ViewBag.CountLike
+                @Html.ActionLink("Dislikes:", "Dislike", new { controller = "Post", postId = item.postId }) @ViewBag.CountDisLike
+            </div>
+        </div>
+        <div class="Write-Comment">
+            @using (@Html.BeginForm("WriteComment", "Post", FormMethod.Get))
+            {
+                <input type="hidden" name="postId" value="@Html.DisplayFor(modelItem => item.postId)" />
+                <input type="text" name="writtenComment" placeholder="Write Comment..." id="textbox">
+                <input type="submit" name="comment" value="Comment" id="commentbutt" />
+            }
+        </div>
+    }
+
+    @foreach (var item in Model.comments)
+    {
+        <div class="Comments-Details">
+            <div class="Comment-Details">
+                <img src="~/images/post_pic/@Html.DisplayFor(modelItem => item.Account.profile_pic)" />
+                <b>
+                    @Html.DisplayFor(modelItem => item.Account.Fname)
+                    @Html.DisplayFor(modelItem => item.Account.Lname)
+                </b>
+                :
+                @Html.DisplayFor(modelItem => item.comment1)
+            </div>
+        </div>
+    }
+</div>

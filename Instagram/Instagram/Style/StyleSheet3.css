@@ -1,0 +1,13 @@
+﻿
+.Post-Socials {
+    float:left;
+    width: 285px;
+}
+
+.Post-Socials input {
+    margin-top: 10px;
+    background: none;
+    border: 2px solid black;
+    padding:5px;
+    border-radius:5px;
+}

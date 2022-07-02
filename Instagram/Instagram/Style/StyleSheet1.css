@@ -1,0 +1,31 @@
+﻿
+.Posts-Container{
+    margin:0 auto;
+    width:1140px;
+    display:flex;
+    flex-wrap:wrap;
+}
+
+.Post-Container {
+    margin: 30px;
+    padding: 10px;
+    border: 2px solid #3C3C3C;
+    border-radius: 10px;
+    box-shadow: 5px 10px 15px black;
+}
+
+.Post-Image img{
+    margin-top: -20px;
+    width: 285px;
+    height: 330px;
+}
+.Uploaded-By{
+    float: left;
+    padding: 10px;
+    width: 285px;
+}
+
+.Uploaded-By hr {
+    border-top: 1px solid black;
+    padding-bottom: 0px;
+}

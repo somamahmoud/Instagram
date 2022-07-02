@@ -1,0 +1,79 @@
+﻿.Search {
+    float: right;
+    background: none;
+    border:none;
+}
+
+    .Search input {
+        margin-top: 10px;
+        width: 300px;
+        padding: 5px;
+        background: none;
+        border: 2px solid #939393;
+        border-radius: 10px;
+        color: white;
+    }
+
+#butt {
+    width: 70px;
+    background: none;
+    border: 2px solid #939393;
+    border-radius: 10px;
+    padding-top: 5px;
+    padding-bottom:5px;
+    color: white;
+    transition: 0.2s;
+}
+
+#butt:hover {
+    border: 2px solid #939393;
+    color:black;
+    background: white;
+}
+
+
+.Searched-Users {
+    margin: 0 auto;
+    width: 1140px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.Searched-User {
+    margin: 30px;
+    padding: 10px;
+    border: 2px solid #3C3C3C;
+    border-radius: 10px;
+}
+
+.Searched-User-Image img {
+    width: 330px;
+    height: 300px;
+}
+
+.Searched-User-Name {
+    float:left;
+    padding: 10px;
+}
+.Searched-User-Email {
+    padding: 10px;
+}
+
+.Friend-Request {
+    display: flex;
+    flex-direction: column;
+}
+
+.Friend-Request input {
+    margin-left: 25px;
+    width: 300px;
+    background: #3CBBF3;
+    border: 2px solid #349BC8;
+    transition:0.2s;
+}
+
+.Friend-Request input:hover {
+    background: #42C6FF;
+    border: 2px solid #AFD6E7;
+    transition: 0.2s;
+}

@@ -1,0 +1,630 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="InstagramDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="accountId" />
+          </Key>
+          <Property Name="accountId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Lname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="profile_pic" Type="varchar" MaxLength="2000" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ApprovedFriend">
+          <Key>
+            <PropertyRef Name="friendId" />
+          </Key>
+          <Property Name="friendId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="mainuser" Type="int" />
+          <Property Name="frienduser" Type="int" />
+        </EntityType>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="commentId" />
+          </Key>
+          <Property Name="commentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="comment" Type="nvarchar" MaxLength="250" />
+          <Property Name="postId" Type="int" />
+          <Property Name="accountId" Type="int" />
+        </EntityType>
+        <EntityType Name="DisLikes">
+          <Key>
+            <PropertyRef Name="dislikeId" />
+          </Key>
+          <Property Name="dislikeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="aers" Type="int" />
+          <Property Name="accountId" Type="int" />
+          <Property Name="postId" Type="int" />
+        </EntityType>
+        <EntityType Name="Friend_Request">
+          <Key>
+            <PropertyRef Name="requestId" />
+          </Key>
+          <Property Name="requestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="reciever" Type="int" />
+          <Property Name="sender" Type="int" />
+        </EntityType>
+        <EntityType Name="Likes">
+          <Key>
+            <PropertyRef Name="likeId" />
+          </Key>
+          <Property Name="likeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="taha" Type="int" />
+          <Property Name="accountId" Type="int" />
+          <Property Name="postId" Type="int" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="postId" />
+          </Key>
+          <Property Name="postId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="post_pic" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="content" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="fk_Acount_id" Type="int" />
+        </EntityType>
+        <Association Name="FK__ApprovedF__frien__403A8C7D">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="ApprovedFriend" Type="Self.ApprovedFriend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="accountId" />
+            </Principal>
+            <Dependent Role="ApprovedFriend">
+              <PropertyRef Name="frienduser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ApprovedF__mainu__3F466844">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="ApprovedFriend" Type="Self.ApprovedFriend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="accountId" />
+            </Principal>
+            <Dependent Role="ApprovedFriend">
+              <PropertyRef Name="mainuser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comment__account__440B1D61">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="accountId" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="accountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comment__postId__4316F928">
+          <End Role="Post" Type="Self.Post" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="postId" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="postId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DisLikes__accoun__4AB81AF0">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="DisLikes" Type="Self.DisLikes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="accountId" />
+            </Principal>
+            <Dependent Role="DisLikes">
+              <PropertyRef Name="accountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DisLikes__postId__4BAC3F29">
+          <End Role="Post" Type="Self.Post" Multiplicity="0..1" />
+          <End Role="DisLikes" Type="Self.DisLikes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="postId" />
+            </Principal>
+            <Dependent Role="DisLikes">
+              <PropertyRef Name="postId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Friend_Re__recie__3B75D760">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Friend_Request" Type="Self.Friend_Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="accountId" />
+            </Principal>
+            <Dependent Role="Friend_Request">
+              <PropertyRef Name="reciever" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Friend_Re__sende__3C69FB99">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Friend_Request" Type="Self.Friend_Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="accountId" />
+            </Principal>
+            <Dependent Role="Friend_Request">
+              <PropertyRef Name="sender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Likes__accountId__46E78A0C">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Likes" Type="Self.Likes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="accountId" />
+            </Principal>
+            <Dependent Role="Likes">
+              <PropertyRef Name="accountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Likes__postId__47DBAE45">
+          <End Role="Post" Type="Self.Post" Multiplicity="0..1" />
+          <End Role="Likes" Type="Self.Likes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="postId" />
+            </Principal>
+            <Dependent Role="Likes">
+              <PropertyRef Name="postId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Post__fk_Acount___38996AB5">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Post" Type="Self.Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="accountId" />
+            </Principal>
+            <Dependent Role="Post">
+              <PropertyRef Name="fk_Acount_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="InstagramDBModelStoreContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ApprovedFriend" EntityType="Self.ApprovedFriend" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DisLikes" EntityType="Self.DisLikes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Friend_Request" EntityType="Self.Friend_Request" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Likes" EntityType="Self.Likes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Post" EntityType="Self.Post" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__ApprovedF__frien__403A8C7D" Association="Self.FK__ApprovedF__frien__403A8C7D">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="ApprovedFriend" EntitySet="ApprovedFriend" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ApprovedF__mainu__3F466844" Association="Self.FK__ApprovedF__mainu__3F466844">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="ApprovedFriend" EntitySet="ApprovedFriend" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comment__account__440B1D61" Association="Self.FK__Comment__account__440B1D61">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comment__postId__4316F928" Association="Self.FK__Comment__postId__4316F928">
+            <End Role="Post" EntitySet="Post" />
+            <End Role="Comment" EntitySet="Comment" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DisLikes__accoun__4AB81AF0" Association="Self.FK__DisLikes__accoun__4AB81AF0">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="DisLikes" EntitySet="DisLikes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DisLikes__postId__4BAC3F29" Association="Self.FK__DisLikes__postId__4BAC3F29">
+            <End Role="Post" EntitySet="Post" />
+            <End Role="DisLikes" EntitySet="DisLikes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Friend_Re__recie__3B75D760" Association="Self.FK__Friend_Re__recie__3B75D760">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Friend_Request" EntitySet="Friend_Request" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Friend_Re__sende__3C69FB99" Association="Self.FK__Friend_Re__sende__3C69FB99">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Friend_Request" EntitySet="Friend_Request" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Likes__accountId__46E78A0C" Association="Self.FK__Likes__accountId__46E78A0C">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Likes" EntitySet="Likes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Likes__postId__47DBAE45" Association="Self.FK__Likes__postId__47DBAE45">
+            <End Role="Post" EntitySet="Post" />
+            <End Role="Likes" EntitySet="Likes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Post__fk_Acount___38996AB5" Association="Self.FK__Post__fk_Acount___38996AB5">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Post" EntitySet="Post" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="InstagramDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="accountId" />
+          </Key>
+          <Property Name="accountId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Lname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="profile_pic" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ApprovedFriends" Relationship="Self.FK__ApprovedF__frien__403A8C7D" FromRole="Account" ToRole="ApprovedFriend" />
+          <NavigationProperty Name="ApprovedFriends1" Relationship="Self.FK__ApprovedF__mainu__3F466844" FromRole="Account" ToRole="ApprovedFriend" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK__Comment__account__440B1D61" FromRole="Account" ToRole="Comment" />
+          <NavigationProperty Name="DisLikes" Relationship="Self.FK__DisLikes__accoun__4AB81AF0" FromRole="Account" ToRole="DisLikes" />
+          <NavigationProperty Name="Friend_Request" Relationship="Self.FK__Friend_Re__recie__3B75D760" FromRole="Account" ToRole="Friend_Request" />
+          <NavigationProperty Name="Friend_Request1" Relationship="Self.FK__Friend_Re__sende__3C69FB99" FromRole="Account" ToRole="Friend_Request" />
+          <NavigationProperty Name="Likes" Relationship="Self.FK__Likes__accountId__46E78A0C" FromRole="Account" ToRole="Likes" />
+          <NavigationProperty Name="Posts" Relationship="Self.FK__Post__fk_Acount___38996AB5" FromRole="Account" ToRole="Post" />
+        </EntityType>
+        <EntityType Name="ApprovedFriend">
+          <Key>
+            <PropertyRef Name="friendId" />
+          </Key>
+          <Property Name="friendId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="mainuser" Type="Int32" />
+          <Property Name="frienduser" Type="Int32" />
+          <NavigationProperty Name="Account" Relationship="Self.FK__ApprovedF__frien__403A8C7D" FromRole="ApprovedFriend" ToRole="Account" />
+          <NavigationProperty Name="Account1" Relationship="Self.FK__ApprovedF__mainu__3F466844" FromRole="ApprovedFriend" ToRole="Account" />
+        </EntityType>
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="commentId" />
+          </Key>
+          <Property Name="commentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="comment1" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="postId" Type="Int32" />
+          <Property Name="accountId" Type="Int32" />
+          <NavigationProperty Name="Account" Relationship="Self.FK__Comment__account__440B1D61" FromRole="Comment" ToRole="Account" />
+          <NavigationProperty Name="Post" Relationship="Self.FK__Comment__postId__4316F928" FromRole="Comment" ToRole="Post" />
+        </EntityType>
+        <EntityType Name="DisLike">
+          <Key>
+            <PropertyRef Name="dislikeId" />
+          </Key>
+          <Property Name="dislikeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="aers" Type="Int32" />
+          <Property Name="accountId" Type="Int32" />
+          <Property Name="postId" Type="Int32" />
+          <NavigationProperty Name="Account" Relationship="Self.FK__DisLikes__accoun__4AB81AF0" FromRole="DisLikes" ToRole="Account" />
+          <NavigationProperty Name="Post" Relationship="Self.FK__DisLikes__postId__4BAC3F29" FromRole="DisLikes" ToRole="Post" />
+        </EntityType>
+        <EntityType Name="Friend_Request">
+          <Key>
+            <PropertyRef Name="requestId" />
+          </Key>
+          <Property Name="requestId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="reciever" Type="Int32" />
+          <Property Name="sender" Type="Int32" />
+          <NavigationProperty Name="Account" Relationship="Self.FK__Friend_Re__recie__3B75D760" FromRole="Friend_Request" ToRole="Account" />
+          <NavigationProperty Name="Account1" Relationship="Self.FK__Friend_Re__sende__3C69FB99" FromRole="Friend_Request" ToRole="Account" />
+        </EntityType>
+        <EntityType Name="Like">
+          <Key>
+            <PropertyRef Name="likeId" />
+          </Key>
+          <Property Name="likeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="taha" Type="Int32" />
+          <Property Name="accountId" Type="Int32" />
+          <Property Name="postId" Type="Int32" />
+          <NavigationProperty Name="Account" Relationship="Self.FK__Likes__accountId__46E78A0C" FromRole="Likes" ToRole="Account" />
+          <NavigationProperty Name="Post" Relationship="Self.FK__Likes__postId__47DBAE45" FromRole="Likes" ToRole="Post" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="postId" />
+          </Key>
+          <Property Name="postId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="post_pic" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="content" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="fk_Acount_id" Type="Int32" />
+          <NavigationProperty Name="Account" Relationship="Self.FK__Post__fk_Acount___38996AB5" FromRole="Post" ToRole="Account" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK__Comment__postId__4316F928" FromRole="Post" ToRole="Comment" />
+          <NavigationProperty Name="DisLikes" Relationship="Self.FK__DisLikes__postId__4BAC3F29" FromRole="Post" ToRole="DisLikes" />
+          <NavigationProperty Name="Likes" Relationship="Self.FK__Likes__postId__47DBAE45" FromRole="Post" ToRole="Likes" />
+        </EntityType>
+        <Association Name="FK__ApprovedF__frien__403A8C7D">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="ApprovedFriend" Type="Self.ApprovedFriend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="accountId" />
+            </Principal>
+            <Dependent Role="ApprovedFriend">
+              <PropertyRef Name="frienduser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ApprovedF__mainu__3F466844">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="ApprovedFriend" Type="Self.ApprovedFriend" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="accountId" />
+            </Principal>
+            <Dependent Role="ApprovedFriend">
+              <PropertyRef Name="mainuser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comment__account__440B1D61">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="accountId" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="accountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DisLikes__accoun__4AB81AF0">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="DisLikes" Type="Self.DisLike" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="accountId" />
+            </Principal>
+            <Dependent Role="DisLikes">
+              <PropertyRef Name="accountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Friend_Re__recie__3B75D760">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Friend_Request" Type="Self.Friend_Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="accountId" />
+            </Principal>
+            <Dependent Role="Friend_Request">
+              <PropertyRef Name="reciever" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Friend_Re__sende__3C69FB99">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Friend_Request" Type="Self.Friend_Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="accountId" />
+            </Principal>
+            <Dependent Role="Friend_Request">
+              <PropertyRef Name="sender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Likes__accountId__46E78A0C">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Likes" Type="Self.Like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="accountId" />
+            </Principal>
+            <Dependent Role="Likes">
+              <PropertyRef Name="accountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Post__fk_Acount___38996AB5">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Post" Type="Self.Post" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="accountId" />
+            </Principal>
+            <Dependent Role="Post">
+              <PropertyRef Name="fk_Acount_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comment__postId__4316F928">
+          <End Role="Post" Type="Self.Post" Multiplicity="0..1" />
+          <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="postId" />
+            </Principal>
+            <Dependent Role="Comment">
+              <PropertyRef Name="postId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__DisLikes__postId__4BAC3F29">
+          <End Role="Post" Type="Self.Post" Multiplicity="0..1" />
+          <End Role="DisLikes" Type="Self.DisLike" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="postId" />
+            </Principal>
+            <Dependent Role="DisLikes">
+              <PropertyRef Name="postId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Likes__postId__47DBAE45">
+          <End Role="Post" Type="Self.Post" Multiplicity="0..1" />
+          <End Role="Likes" Type="Self.Like" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="postId" />
+            </Principal>
+            <Dependent Role="Likes">
+              <PropertyRef Name="postId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="InstagramDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="Self.Account" />
+          <EntitySet Name="ApprovedFriends" EntityType="Self.ApprovedFriend" />
+          <EntitySet Name="Comments" EntityType="Self.Comment" />
+          <EntitySet Name="DisLikes" EntityType="Self.DisLike" />
+          <EntitySet Name="Friend_Request" EntityType="Self.Friend_Request" />
+          <EntitySet Name="Likes" EntityType="Self.Like" />
+          <EntitySet Name="Posts" EntityType="Self.Post" />
+          <AssociationSet Name="FK__ApprovedF__frien__403A8C7D" Association="Self.FK__ApprovedF__frien__403A8C7D">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="ApprovedFriend" EntitySet="ApprovedFriends" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ApprovedF__mainu__3F466844" Association="Self.FK__ApprovedF__mainu__3F466844">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="ApprovedFriend" EntitySet="ApprovedFriends" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comment__account__440B1D61" Association="Self.FK__Comment__account__440B1D61">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DisLikes__accoun__4AB81AF0" Association="Self.FK__DisLikes__accoun__4AB81AF0">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="DisLikes" EntitySet="DisLikes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Friend_Re__recie__3B75D760" Association="Self.FK__Friend_Re__recie__3B75D760">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Friend_Request" EntitySet="Friend_Request" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Friend_Re__sende__3C69FB99" Association="Self.FK__Friend_Re__sende__3C69FB99">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Friend_Request" EntitySet="Friend_Request" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Likes__accountId__46E78A0C" Association="Self.FK__Likes__accountId__46E78A0C">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Likes" EntitySet="Likes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Post__fk_Acount___38996AB5" Association="Self.FK__Post__fk_Acount___38996AB5">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Post" EntitySet="Posts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comment__postId__4316F928" Association="Self.FK__Comment__postId__4316F928">
+            <End Role="Post" EntitySet="Posts" />
+            <End Role="Comment" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__DisLikes__postId__4BAC3F29" Association="Self.FK__DisLikes__postId__4BAC3F29">
+            <End Role="Post" EntitySet="Posts" />
+            <End Role="DisLikes" EntitySet="DisLikes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Likes__postId__47DBAE45" Association="Self.FK__Likes__postId__47DBAE45">
+            <End Role="Post" EntitySet="Posts" />
+            <End Role="Likes" EntitySet="Likes" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="InstagramDBModelStoreContainer" CdmEntityContainer="InstagramDBEntities">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="InstagramDBModel.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="accountId" ColumnName="accountId" />
+                <ScalarProperty Name="Fname" ColumnName="Fname" />
+                <ScalarProperty Name="Lname" ColumnName="Lname" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="profile_pic" ColumnName="profile_pic" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ApprovedFriends">
+            <EntityTypeMapping TypeName="InstagramDBModel.ApprovedFriend">
+              <MappingFragment StoreEntitySet="ApprovedFriend">
+                <ScalarProperty Name="friendId" ColumnName="friendId" />
+                <ScalarProperty Name="mainuser" ColumnName="mainuser" />
+                <ScalarProperty Name="frienduser" ColumnName="frienduser" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="InstagramDBModel.Comment">
+              <MappingFragment StoreEntitySet="Comment">
+                <ScalarProperty Name="commentId" ColumnName="commentId" />
+                <ScalarProperty Name="comment1" ColumnName="comment" />
+                <ScalarProperty Name="postId" ColumnName="postId" />
+                <ScalarProperty Name="accountId" ColumnName="accountId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DisLikes">
+            <EntityTypeMapping TypeName="InstagramDBModel.DisLike">
+              <MappingFragment StoreEntitySet="DisLikes">
+                <ScalarProperty Name="dislikeId" ColumnName="dislikeId" />
+                <ScalarProperty Name="aers" ColumnName="aers" />
+                <ScalarProperty Name="accountId" ColumnName="accountId" />
+                <ScalarProperty Name="postId" ColumnName="postId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Friend_Request">
+            <EntityTypeMapping TypeName="InstagramDBModel.Friend_Request">
+              <MappingFragment StoreEntitySet="Friend_Request">
+                <ScalarProperty Name="requestId" ColumnName="requestId" />
+                <ScalarProperty Name="reciever" ColumnName="reciever" />
+                <ScalarProperty Name="sender" ColumnName="sender" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Likes">
+            <EntityTypeMapping TypeName="InstagramDBModel.Like">
+              <MappingFragment StoreEntitySet="Likes">
+                <ScalarProperty Name="likeId" ColumnName="likeId" />
+                <ScalarProperty Name="taha" ColumnName="taha" />
+                <ScalarProperty Name="accountId" ColumnName="accountId" />
+                <ScalarProperty Name="postId" ColumnName="postId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Posts">
+            <EntityTypeMapping TypeName="InstagramDBModel.Post">
+              <MappingFragment StoreEntitySet="Post">
+                <ScalarProperty Name="postId" ColumnName="postId" />
+                <ScalarProperty Name="post_pic" ColumnName="post_pic" />
+                <ScalarProperty Name="content" ColumnName="content" />
+                <ScalarProperty Name="fk_Acount_id" ColumnName="fk_Acount_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

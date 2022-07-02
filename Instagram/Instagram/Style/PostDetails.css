@@ -1,0 +1,98 @@
+﻿.flexx {
+    display:flex;
+    flex-direction: column;
+}
+
+.Post-Container-Details {
+    margin: 30px;
+    padding: 10px;
+    border: 2px solid #3C3C3C;
+    width: 425px;
+    margin: 50px auto;
+    box-shadow: 5px 10px 15px black;
+}
+
+.Post-Image-Details img {
+    width: 400px;
+    height: 450px;
+    margin-top: -20px;
+    border-radius: 5px;
+}
+
+.Uploaded-By img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.Uploaded-By-Details img {
+     width:40px;
+     height:40px;
+     border-radius:50%;
+}
+
+.Uploaded-By-Details {
+    float: left;
+    padding: 10px;
+    width: 285px;
+}
+
+.Uploaded-By-Details hr {
+        border-top: 1px solid black;
+        width: 380px;
+}
+
+.Post-Like-Dislike {
+    float: left;
+    margin: 10px auto;
+    margin-left: 20px;
+}
+
+.Write-Comment {
+    margin:0 auto;
+    width: 100%;
+}
+
+.Write-Comment #textbox {
+        margin-left:385px;
+        width: 500px;
+        height: 40px;
+        border-radius: 12px;
+}
+.Write-Comment input {
+        margin-left: 385px;
+        width: 700px;
+}
+
+.Write-Comment #commentbutt {
+        width: 100px;
+        margin-left: 0;
+        height: 40px;
+        background: #349BC8;
+        border: 2px solid white;
+        border-radius: 12px;
+        transition:0.3s;
+}
+
+.Write-Comment #commentbutt:hover {
+    color:white;
+    border: 2px solid black;
+}
+
+.Write-Comment #textbox:focus {
+    box-shadow: -5px 3px 15px;
+}
+.Comments-Details {
+    display:flex;
+    flex-direction:column;
+    width: 100%;
+}
+.Comment-Details {
+    margin-top: 15px;
+    border: 2px solid black;
+
+}
+.Comment-Details img{
+    width:40px;
+    height:40px;
+}

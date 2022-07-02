@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Instagram.Models.Friend_Request>
+
+@{
+    ViewBag.Title = "ShowRequests";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model == null)
+{
+    <h2>No Friend Requests</h2>
+}
+else
+{
+    <div class="Searched-Users">
+        @foreach (var item in Model)
+        {
+            <div class="Searched-User">
+                @using (@Html.BeginForm("Approve", "Friend", FormMethod.Get))
+                {
+                    <div class="Searched-User-Image">
+                        <img src="~/images/profile_pic/@Html.DisplayFor(modelItem => item.Account1.profile_pic)" />
+                    </div>
+                    <div class="Searched-User-Name">
+                        @Html.DisplayFor(modelItem => item.Account1.Fname)
+                        @Html.DisplayFor(modelItem => item.Account1.Lname)
+                    </div>
+                    <div class="Searched-User-Email">
+                        @Html.DisplayFor(modelItem => item.Account1.Email)
+                    </div>
+                    <div class="Friend-Request">
+                        <input type="hidden" id="senderId" name="senderId" value="@Html.DisplayFor(modelItem => item.sender)">
+                        <input type="submit" name="submitButton" value="Approve" />
+                        <input type="submit" name ="submitButton" value="Delete" />
+                    </div>
+                }
+            </div>
+        }
+    </div>
+}

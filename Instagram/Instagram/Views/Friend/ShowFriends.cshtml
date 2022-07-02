@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Instagram.Models.ApprovedFriend>
+
+@{
+    ViewBag.Title = "ShowFriends";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="Searched-Users">
+    @foreach (var item in Model)
+    {
+        <div class="Searched-User">
+            <div class="Searched-User-Image">
+                <img src="~/images/profile_pic/@Html.DisplayFor(modelItem => item.Account.profile_pic)" />
+            </div>
+            <div class="Searched-User-Name">
+                @Html.DisplayFor(modelItem => item.Account.Fname)
+                @Html.DisplayFor(modelItem => item.Account.Lname)
+            </div>
+            <div class="Searched-User-Email">
+                @Html.DisplayFor(modelItem => item.Account.Email)
+            </div>
+            <div class="Friend-Request">
+                @using (@Html.BeginForm("Show", "Profile", FormMethod.Get))
+                {
+                    <input type="hidden" id="FriendId" name="FriendId" value="@Html.DisplayFor(modelItem => item.Account.accountId)">
+                    <input type="submit" name="submitButton" value="Profile" />
+                }
+
+            </div>
+        </div>
+    }
+</div>
